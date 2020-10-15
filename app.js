@@ -15,7 +15,7 @@ app.listen(3000, function(){ //listen이란 메서드는 port를 바라봄. 3000
 
 //post방식으로 요청할때의 필수 명령 두 가지 > 이걸 해야 리퀘스트의 바디에 접근 가능함
 app.use(express.json()); //post방식으로 요청이 들어오는 request를 json으로 만들어라
-app.use(express.urlencoded({extended:false})); //익스텐디드 변수에 false => 요청 들어온 사항을 쿼리스트링으로 바꿔라. 노드가 가진 기본 쿼리로 바꿔라?
+app.use(express.urlencoded({extended:false})); //익스텐디드 변수에 false => 요청 들어온 사항을 쿼리스트링으로 바꿔라. 노드가 가진 기본 쿼리(해석체계)로 바꿔라?
 
 app.use('/', express.static(path.join(__dirname, './public'))); //app.use => 미들웨어를 사용함. / 루트로 요청들어온다면 express에서 정적인(Static) 폴더를 지정해서 거기로 보내라
     //index.html이 public폴더 바로 안에 있어야 함 / 그리고 index.html을 수정하면 서버를 다시 접속안해도 바로바로 변경사항이 적용됨 (node에서 한 것과는 다르게. 동적생성이 아니므로. 정적파일이니까)
