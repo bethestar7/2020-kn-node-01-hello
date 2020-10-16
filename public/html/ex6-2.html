@@ -1,0 +1,126 @@
+<script>
+    // 구조분해 할당(비구조화 할당:작년까지의 명칭)
+    const obj = {
+        a: 'A',
+        b: 'B',
+        c: 'C',
+        d: 'D'
+    }
+    //var a = obj.a; 기존방식
+    //var b = obj.b;
+    //var c = obj.c;
+    var {a, b, c} = obj; //구조분해할당 방식 / var a 에 obj의 a가 들어오고 b, c 가 들어온다
+    console.log(a, b, c);
+    var {a, d} = obj; //구조분해할당 방식 / 원하는 것만 뽑을 수도 있음
+    console.log(a, d);
+
+    //var userid = req.body.userid; 기존방식
+    //var userpw = req.body.userpw;
+    //var {userid, userpw} = req.body; //구조분해할당 방식req.body의 userid와 userpw를 var의 자리에 각각 넣는다
+
+
+    // rest operator(나머지 연산자) 혹은 spread operator(펼침 연산자)
+    const fruits = ['apple', 'banana', 'mango'];
+    const fruits2 = ['kiwi', ...fruits, 'orange']; //kiwi와 orange사이에 apple, banana, mango넣기 => ...fruits가 펼침연산자!
+    console.log(fruits2);
+    //const fruits3 = fruits2.splice(0, 0, fruits[0], fruits[1], fruits[2]); //기존 es5에서 1번 인덱스자리에 fruits를 넣어라. 이거 안되는듯..
+    
+    const newFruits = fruits.concat(fruits2); //2개 배열을 합치는 concat()메서드
+    console.log(newFruits);
+
+
+    /*
+    class Test { // 자바는 똑같이 constructor가 세 개 있어야 함 
+        constructor() {
+
+        }
+        constructor() {
+
+        }
+        constructor() {
+
+        }
+    }
+    */
+    class Test { // 하지만 자바스크립트 ES6는 펼침연산자로 한번에 받을 수 있음 . 모든 인자를 여기에(...arg, 펼침연산자) 받겠다는 뜻
+        constructor(...arg) { //arg는 argument약자고 이름은 바꿔도 됨!
+            this.arg = arg
+        }
+        print() {
+            console.log(this.arg);
+        }
+    }
+
+    var test = new Test(); //새로운 객체에 인스턴스 만듦
+    var test2 = new Test('A');
+    var test3 = new Test('A', 'B');
+    test.print();
+    test2.print();
+    test3.print();
+    
+
+    //es5에서 가변인자를 받는 함수
+    function sample(a, b) {
+         var _a = a || 10;
+         var _b = b || 20;
+         console.log(_a + _b);
+    }
+    
+    sample(); //값이 없으니까 a는 10되고 b는 20됨 그래서 30
+    sample(1);//a에만 1넣었음 a는 1되고 b는 20됨 그래서 21
+    sample(1, 2); //a에 1, b에 2 그래서 3
+
+    /* 오버로딩..같은 메서든데 인자가 여러개 올 수 있음
+    animate({"left":"100px"});
+    animate({"left":"100px"}, 500);
+    animate({"left":"100px"}, 500, "linear");
+    animate({"left":"100px"}, 500, "linear", function(){});
+    */
+
+    //ES6에서 가변인자? 하는 방법
+    function sample2(a=10, b=20) { //php처럼 기본값을 등록할 수 있음
+        console.log(a + b);
+    }
+    sample(); //값이 없으니까 a는 10되고 b는 20됨 그래서 30
+    sample(1);//a에만 1넣었음 a는 1되고 b는 20됨 그래서 21
+    sample(1, 2); //a에 1, b에 2 그래서 3
+
+
+    console.clear();
+    
+    
+    // Arrow Function 화살표 함수
+    //예제1
+    //es5 함수 선언방법 #1 함수 선언문
+    function fn(a) {
+        return a * a;
+    }
+    //es5 함수 산언방법 #2 함수 표현식
+    var fn2 = function(a) {
+        return a * a;
+    }
+    //es6 화살표 함수 (함수표현식을 축약 가능)
+    var fn3 = (a) => { return a * a; }
+    var fn4 = a => a * a; //return값이 있는 한줄짜리 함수는 이렇게도 더 줄일 수 있음
+
+    console.log( fn3(5) ); //25
+    console.log( fn4(5) ); //25
+
+    //예제2
+    var dt = new Date(); 
+    console.log( zeroPlus(dt.getSeconds()) ); //dt.getSeconds() => 현재 초 받기
+    function zeroPlus(v) {
+        return v < 10 ? '0'+v : v; //v가 10보다 작으면 0더해서 리턴하고 아니면 v만 리턴해라 라고 이전까지는 썼었음
+    }
+
+    var zeroPlus2 = v =>  v < 10 ? '0'+v : v; //이렇게 줄일 수 있음
+    console.log( zeroPlus2(dt.getSeconds()) );
+
+
+
+
+
+
+
+
+</script>
